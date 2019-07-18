@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class JengaBoard : MonoBehaviour
 {
-    //젠가 블럭 리스트
+
     
 
     // Start is called before the first frame update
@@ -16,6 +18,10 @@ public class JengaBoard : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            SceneManager.LoadScene("SampleScene");
+        }
     }
+    
 }
