@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: -4740696532365291788}
   m_Layer: 0
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: JengaBlock
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -125,4 +125,4 @@ MonoBehaviour:
   isTop: 0
   isPicked: 0
   Board: {fileID: 5079154904015527337, guid: a130254e4d7db264d9dc86cd41e3ce89, type: 3}
-  text: {fileID: 6416356829841955380, guid: 9b2aee759b0bd7b4b9f1a73774c6b31b, type: 3}
+  text: {fileID: 5003002126451593505, guid: 405321a588aad7b438a780ec9bcd2173, type: 3}

@@ -10,20 +10,26 @@ public class JengaBlock : MonoBehaviour
     public bool isPicked = false;
     private GameObject t;
 
+    private bool isPlayer1Turn;
+
     [SerializeField] private GameObject Board;
-    [SerializeField] private GameObject text;
+
+    [SerializeField]private GameObject gameManager;
+    private Manager manager;
 
     // Start is called before the first frame update
     void Start()
     {
         Board = GameObject.FindGameObjectWithTag("Board");
-        text = GameObject.FindGameObjectWithTag("GameOverText");
+        gameManager = GameObject.FindGameObjectWithTag("GameManager");
+        manager = gameManager.gameObject.GetComponent<Manager>();
+        Debug.Log(manager.GetCurrentCamera(0));
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        isPlayer1Turn = manager.isPlayer1Turn;
     }
 
     private void FixedUpdate()
@@ -46,29 +52,27 @@ public class JengaBlock : MonoBehaviour
         RaycastHit hit;
         GameObject target = null;
 
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if((Physics.Raycast(ray.origin,ray.direction*10,out hit)) == true)
+        if (manager.GetCurrentCamera(0))
         {
-            target = hit.collider.gameObject;
+            Ray ray = manager.GetCamera(0).ScreenPointToRay(Input.mousePosition);
+            if((Physics.Raycast(ray.origin,ray.direction*10,out hit)) == true)
+            {
+                target = hit.collider.gameObject;
+            }
+            return target;
         }
-        return target;
+        return null;
     }
-    private void GameOver()
-    {
-        text.active = true;
-        Time.timeScale = 0.0f;
-        
-    }
+    
 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject == Board)
         {
-            Debug.Log("Collision");
-            if (!(isFloor && isPicked))
+            if (!(isFloor))
             {
                 Debug.Log("Game Over");
-                GameOver();
+                Board.gameObject.GetComponent<JengaBoard>().GameOver();
             }
         }
     }

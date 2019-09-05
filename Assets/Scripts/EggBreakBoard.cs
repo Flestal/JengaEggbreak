@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EggBreakBoard : MonoBehaviour
 {
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -12,6 +13,10 @@ public class EggBreakBoard : MonoBehaviour
 
     // Update is called once per frame
     void Update()
+    {
+        
+    }
+    private void OnCollisionEnter(Collision collision)
     {
         
     }

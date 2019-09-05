@@ -6,13 +6,12 @@ using UnityEngine.SceneManagement;
 
 public class JengaBoard : MonoBehaviour
 {
-
-    
+    [SerializeField] private Text text;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        text.text = "";
     }
 
     // Update is called once per frame
@@ -23,5 +22,9 @@ public class JengaBoard : MonoBehaviour
             SceneManager.LoadScene("SampleScene");
         }
     }
-    
+
+    public void GameOver()
+    {
+        text.text = "Game Over \n Press R to restart";
+    }
 }
