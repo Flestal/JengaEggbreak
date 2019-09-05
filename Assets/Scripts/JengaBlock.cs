@@ -9,8 +9,7 @@ public class JengaBlock : MonoBehaviour
     public bool isTop = false;
     public bool isPicked = false;
     private GameObject t;
-
-    private bool isPlayer1Turn;
+    
 
     [SerializeField] private GameObject Board;
 
@@ -24,12 +23,13 @@ public class JengaBlock : MonoBehaviour
         gameManager = GameObject.FindGameObjectWithTag("GameManager");
         manager = gameManager.gameObject.GetComponent<Manager>();
         Debug.Log(manager.GetCurrentCamera(0));
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        isPlayer1Turn = manager.isPlayer1Turn;
+
     }
 
     private void FixedUpdate()
@@ -41,11 +41,22 @@ public class JengaBlock : MonoBehaviour
             {
                 if (t.Equals(gameObject))
                 {
-                    Destroy(gameObject);
+                    BlockDestroy();
                 }
             }
             
         }
+    }
+    public bool BlockDestroy()
+    {
+        if (true)//턴 조건
+        {
+            Destroy(gameObject);
+            manager.isPlayer1Turn = !manager.isPlayer1Turn;
+            Debug.Log(manager.isPlayer1Turn);
+            return true;
+        }
+        return false;
     }
     private GameObject ClickedObject()
     {
@@ -72,7 +83,7 @@ public class JengaBlock : MonoBehaviour
             if (!(isFloor))
             {
                 Debug.Log("Game Over");
-                Board.gameObject.GetComponent<JengaBoard>().GameOver();
+                Board.gameObject.GetComponent<JengaBoard>().GameOver(manager.isPlayer1Turn);
             }
         }
     }

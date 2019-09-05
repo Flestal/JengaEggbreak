@@ -1,15 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Manager : MonoBehaviour
 {
     private static Manager m_Instance;
 
+    [SerializeField] private Text text;
     public Camera[] m_AllCameras;
     int cameraNum = 0;
+    private bool GameOverCalled = false;
 
     public int chipRed
+    {
+        get;
+        set;
+    }
+    public int chipBlue
     {
         get;
         set;
@@ -30,17 +38,11 @@ public class Manager : MonoBehaviour
         }
         m_AllCameras[cameraNum].gameObject.active = true;
         //Debug.Log(m_AllCameras[0].gameObject.active);
-        chipRed = 4;
+        chipRed = 2;
+        chipBlue = 2;
         isPlayer1Turn = true;
+        text.text = "";
     }
-    /*public static Manager I
-    {
-        get
-        {
-            
-        }
-       
-    }*/
     public static Manager GetManager()
     {
         if (m_Instance==null)
@@ -64,6 +66,14 @@ public class Manager : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        if (GetCurrentCamera(1))
+        {
+            text.gameObject.SetActive(true);
+        }
+        else
+        {
+            text.gameObject.SetActive(false);
+        }
         if (Input.GetKeyDown(KeyCode.Space))
         {
             cameraNum=(cameraNum < m_AllCameras.Length-1 ? cameraNum+1 : 0);
@@ -73,5 +83,19 @@ public class Manager : MonoBehaviour
             }
             m_AllCameras[cameraNum].gameObject.active = true;
         }
+        if (!GameOverCalled)
+        {
+            if (chipRed == 0)
+            {
+                text.text = "Blue Wins!";
+                GameOverCalled = true;
+            }
+            if (chipBlue == 0)
+            {
+                text.text = "Red Wins!";
+                GameOverCalled = true;
+            }
+        }
+        
     }
 }
