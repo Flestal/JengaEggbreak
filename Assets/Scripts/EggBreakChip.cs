@@ -30,7 +30,7 @@ public class EggBreakChip : MonoBehaviour
             t = ClickedObject();
             if (t != null)
             {
-                if (t.Equals(gameObject))
+                if (t.Equals(gameObject) && (manager.EggBreak_RedTurn == this.isRed))
                 {
                     Debug.Log(this.gameObject.transform.position.x+"/"+this.gameObject.transform.position.z);
                     this.isClicked = true;
@@ -45,7 +45,7 @@ public class EggBreakChip : MonoBehaviour
             {
                 if (t.Equals(Board))
                 {
-                    if (isClicked)
+                    if (isClicked && (manager.EggBreak_RedTurn == this.isRed))
                     {
                         RaycastHit hit;
                         GameObject target = null;
@@ -57,12 +57,12 @@ public class EggBreakChip : MonoBehaviour
                             {
                                 float xx = hit.point.x;
                                 float zz = hit.point.z;
-                                //Debug.Log(xx + "|" + zz);
                                 Vector3 direction = new Vector3((this.gameObject.transform.position.x-xx)*velocity,this.gameObject.transform.position.y+0.01f,(this.gameObject.transform.position.z-zz)*velocity);
                                 this.gameObject.GetComponent<Rigidbody>().AddForce(direction, ForceMode.Impulse);
                             }
                         }
                         isClicked = false;
+                        manager.EggBreak_RedTurn = !manager.EggBreak_RedTurn;
                     }
                 }
             }

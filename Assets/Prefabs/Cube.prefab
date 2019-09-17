@@ -101,14 +101,14 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7657098494818042265}
   serializedVersion: 2
-  m_Mass: 5
-  m_Drag: 0
+  m_Mass: 30
+  m_Drag: 1
   m_AngularDrag: 0
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 2
+  m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 1
+  m_CollisionDetection: 3
 --- !u!114 &-4740696532365291788
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -125,4 +125,4 @@ MonoBehaviour:
   isTop: 0
   isPicked: 0
   Board: {fileID: 5079154904015527337, guid: a130254e4d7db264d9dc86cd41e3ce89, type: 3}
-  text: {fileID: 5003002126451593505, guid: 405321a588aad7b438a780ec9bcd2173, type: 3}
+  gameManager: {fileID: 0}

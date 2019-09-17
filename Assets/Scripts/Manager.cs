@@ -28,6 +28,11 @@ public class Manager : MonoBehaviour
         get;
         set;
     }
+    public bool EggBreak_RedTurn
+    {
+        get;
+        set;
+    }
 
     private void Awake()
     {
@@ -41,6 +46,7 @@ public class Manager : MonoBehaviour
         chipRed = 2;
         chipBlue = 2;
         isPlayer1Turn = true;
+        EggBreak_RedTurn = true;
         text.text = "";
     }
     public static Manager GetManager()
