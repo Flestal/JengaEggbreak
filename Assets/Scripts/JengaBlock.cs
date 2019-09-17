@@ -86,5 +86,10 @@ public class JengaBlock : MonoBehaviour
                 Board.gameObject.GetComponent<JengaBoard>().GameOver(manager.isPlayer1Turn);
             }
         }
+        else if (collision.gameObject.tag == this.gameObject.tag)
+        {
+            this.gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            collision.gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        }
     }
 }
