@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class Manager : MonoBehaviour
 {
+    //변수 여러가지 선언
     private static Manager m_Instance;
 
     [SerializeField] private Text text;
@@ -34,7 +35,7 @@ public class Manager : MonoBehaviour
         set;
     }
 
-    private void Awake()
+    private void Awake()//게임 시작 시 초기화
     {
         m_Instance = new Manager();
         for(int i = 0; i < m_AllCameras.Length; i++)
@@ -49,7 +50,7 @@ public class Manager : MonoBehaviour
         EggBreak_RedTurn = true;
         text.text = "";
     }
-    public static Manager GetManager()
+    public static Manager GetManager()//싱글톤
     {
         if (m_Instance==null)
         m_Instance = new Manager();
@@ -72,7 +73,7 @@ public class Manager : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if (GetCurrentCamera(1))
+        if (GetCurrentCamera(1))//알까기 게임오버 텍스트
         {
             text.gameObject.SetActive(true);
         }
@@ -80,7 +81,7 @@ public class Manager : MonoBehaviour
         {
             text.gameObject.SetActive(false);
         }
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space))//스페이스 바를 통해 카메라 전환(테스트용)
         {
             cameraNum=(cameraNum < m_AllCameras.Length-1 ? cameraNum+1 : 0);
             for (int i = 0; i < m_AllCameras.Length; i++)
@@ -89,16 +90,16 @@ public class Manager : MonoBehaviour
             }
             m_AllCameras[cameraNum].gameObject.active = true;
         }
-        if (!GameOverCalled)
+        if (!GameOverCalled)//게임 진행 도중 알까기 칩이 사라질 때
         {
             if (chipRed == 0)
             {
-                text.text = "Blue Wins!";
+                text.text = "Blue Wins!";//게임 오버 선언
                 GameOverCalled = true;
             }
             if (chipBlue == 0)
             {
-                text.text = "Red Wins!";
+                text.text = "Red Wins!";//게임 오버 선언
                 GameOverCalled = true;
             }
         }
