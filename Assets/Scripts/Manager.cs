@@ -52,9 +52,9 @@ public class Manager : MonoBehaviour
         m_Instance = new Manager();
         for(int i = 0; i < m_AllCameras.Length; i++)
         {
-            m_AllCameras[i].gameObject.active = false;
+            m_AllCameras[i].gameObject.SetActive(false);
         }
-        m_AllCameras[cameraNum].gameObject.active = true;
+        m_AllCameras[cameraNum].gameObject.SetActive(true);
         //Debug.Log(m_AllCameras[0].gameObject.active);
         chipRed = 2;
         chipBlue = 2;
@@ -112,9 +112,9 @@ public class Manager : MonoBehaviour
             cameraNum=(cameraNum < m_AllCameras.Length-1 ? cameraNum+1 : 0);
             for (int i = 0; i < m_AllCameras.Length; i++)
             {
-                m_AllCameras[i].gameObject.active = false;
+                m_AllCameras[i].gameObject.SetActive(false);
             }
-            m_AllCameras[cameraNum].gameObject.active = true;
+            m_AllCameras[cameraNum].gameObject.SetActive(true);
         }
         if (!GameOverCalled)//게임 진행 도중 알까기 칩이 사라질 때
         {

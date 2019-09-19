@@ -10,11 +10,12 @@ public class JengaBlock : MonoBehaviour
     public bool isTop = false;//꼭대기 블럭 확인(사용안함)
     public bool isPicked = false;//선택된 블럭 확인(사용안함)
     private GameObject t;
-    
+    public Vector3 v;
+    [SerializeField]public short _id;
 
     [SerializeField] private GameObject Board;
 
-    [SerializeField]private GameObject gameManager;
+    private GameObject gameManager;
     private Manager manager;
 
     // Start is called before the first frame update
@@ -30,7 +31,7 @@ public class JengaBlock : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        v = new Vector3(this.gameObject.transform.position.x,this.gameObject.transform.position.y,this.gameObject.transform.position.z);
     }
 
     private void FixedUpdate()
