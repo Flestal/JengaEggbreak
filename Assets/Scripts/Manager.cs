@@ -52,9 +52,9 @@ public class Manager : MonoBehaviour
         m_Instance = new Manager();
         for(int i = 0; i < m_AllCameras.Length; i++)
         {
-            m_AllCameras[i].gameObject.active = false;
+            m_AllCameras[i].gameObject.SetActive(false);
         }
-        m_AllCameras[cameraNum].gameObject.active = true;
+        m_AllCameras[cameraNum].gameObject.SetActive(true);
         //Debug.Log(m_AllCameras[0].gameObject.active);
         chipRed = 2;
         chipBlue = 2;
