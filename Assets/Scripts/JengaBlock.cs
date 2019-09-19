@@ -43,6 +43,7 @@ public class JengaBlock : MonoBehaviour
             {
                 if (t.Equals(gameObject))
                 {
+                    Board.GetComponent<JengaBoard>().StartCoroutine("Board_Shuffle");
                     BlockDestroy();
                 }
             }
