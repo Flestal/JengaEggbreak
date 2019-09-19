@@ -33,7 +33,7 @@ public class JengaBoard : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.R))
         {
-            SceneManager.LoadScene("SampleScene");
+            SceneManager.LoadScene("GamePlay");
         }
     }
 
@@ -54,6 +54,44 @@ public class JengaBoard : MonoBehaviour
             text.text = tex;
             GameOverCalled = true;
         }
-        
+    }
+    /*public void Board_Shuffle()
+    {
+        Debug.Log("Shuffle");
+        double cooltime = 0.7f;
+        double timeSpan = 0;
+        timeSpan += Time.deltaTime;
+        double r = Random.value;
+        if (timeSpan > cooltime)  // 경과 시간이 특정 시간이 보다 커졋을 경우
+        {
+            timeSpan = 0;
+            return;
+        }
+        else
+        {
+            if (r < 0.5)
+                this.gameObject.transform.Rotate(Vector3.down * Time.deltaTime);
+            else
+                this.gameObject.transform.Rotate(Vector3.up*Time.deltaTime);
+        }
+    }*/
+
+    public IEnumerator Board_Shuffle()
+    {
+        Debug.Log("shuffle");
+        double setTime = 0.15f;
+        double timeSpan = 0;
+        double r = Random.value;
+        while (timeSpan < setTime)
+        {
+            if(r<0.5)
+                this.gameObject.transform.Rotate(Vector3.forward * Random.Range(-10, 10) * Time.deltaTime);
+            else
+                this.gameObject.transform.Rotate(Vector3.left * Random.Range(-10, 10) * Time.deltaTime);
+
+            timeSpan += 0.01f;
+            yield return new WaitForSeconds(0.01f);
+        }
+        this.gameObject.transform.eulerAngles = new Vector3(0,0,0);
     }
 }
