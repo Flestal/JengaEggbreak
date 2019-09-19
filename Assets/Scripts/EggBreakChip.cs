@@ -63,12 +63,11 @@ public class EggBreakChip : MonoBehaviour
                                 this.gameObject.GetComponent<Rigidbody>().AddForce(direction, ForceMode.Impulse);
                             }
                         }
-                        isClicked = false;
                         manager.EggBreak_RedTurn = !manager.EggBreak_RedTurn;//턴넘기기
                     }
                 }
             }
-
+            isClicked = false;//모든 알까기 칩 클릭 상태 초기화
         }
     }
     private GameObject ClickedObject()//클릭한 오브젝트 반환
