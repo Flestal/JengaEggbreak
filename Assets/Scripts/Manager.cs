@@ -9,11 +9,14 @@ public class Manager : MonoBehaviour
     private static Manager m_Instance;
 
     [SerializeField] private Text text;
+    [SerializeField] private Text turn;
     public Camera[] m_AllCameras;
     int cameraNum = 0;
     private bool GameOverCalled = false;
     double timeSpan = 0f;
     double cooltime = 0.5f;
+    public bool isTurn1_Jenga=false;//젠가에서 선 플레이어 구분
+    public bool isTurn1_EggBreak = false;//알까기에서 선 플레이어 구분
 
     public int chipRed
     {
@@ -99,13 +102,46 @@ public class Manager : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if (GetCurrentCamera(1))//알까기 게임오버 텍스트
+        if (GetCurrentCamera(1))//알까기
         {
             text.gameObject.SetActive(true);
+            turn.text = "";
+            if (EggBreak_RedTurn)
+            {
+                turn.text += "플레이어 1의 턴";
+            }
+            else
+            {
+                turn.text += "플레이어 2의 턴";
+            }
+            if (isTurn1_EggBreak)
+            {
+                turn.text += "\n당신은 플레이어 1입니다.";
+            }
+            else
+            {
+                turn.text += "\n당신은 플레이어 2입니다.";
+            }
         }
-        else
+        else//젠가
         {
             text.gameObject.SetActive(false);
+            if (isPlayer1Turn)
+            {
+                turn.text += "플레이어 1의 턴";
+            }
+            else
+            {
+                turn.text += "플레이어 2의 턴";
+            }
+            if (isTurn1_Jenga)
+            {
+                turn.text += "\n당신은 플레이어 1입니다.";
+            }
+            else
+            {
+                turn.text += "\n당신은 플레이어 2입니다.";
+            }
         }
         if (Input.GetKeyDown(KeyCode.Space))//스페이스 바를 통해 카메라 전환(테스트용)
         {
