@@ -102,6 +102,7 @@ public class Manager : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        turn.text = "";
         if (isPlayer1Turn)
         {
             turn.text += "플레이어 1의 턴";
