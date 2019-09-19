@@ -18,7 +18,7 @@ public class CameraWork : MonoBehaviour
     Transform transme = null;
     /*------------------------*/
     /*---------카메라 회전----------*/
-    [SerializeField] Vector3 targetPos=Vector3.zero;
+    [SerializeField] Vector3 targetPos=new Vector3(0,-1,0);
     /*--------------------------*/
 
     // Start is called before the first frame update
