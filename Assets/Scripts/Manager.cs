@@ -12,6 +12,8 @@ public class Manager : MonoBehaviour
     public Camera[] m_AllCameras;
     int cameraNum = 0;
     private bool GameOverCalled = false;
+    double timeSpan = 0f;
+    double cooltime = 0.5f;
 
     public int chipRed
     {
@@ -34,6 +36,16 @@ public class Manager : MonoBehaviour
         get;
         set;
     }
+    public bool turnPre
+    {
+        get;
+        set;
+    }
+    public bool clickAble
+    {
+        get;
+        set;
+    }
 
     private void Awake()//게임 시작 시 초기화
     {
@@ -49,6 +61,20 @@ public class Manager : MonoBehaviour
         isPlayer1Turn = true;
         EggBreak_RedTurn = true;
         text.text = "";
+        turnPre = false;
+        clickAble = true;
+    }
+    private void Update()
+    {
+        if (turnPre != isPlayer1Turn)
+        {
+            timeSpan += Time.deltaTime;  // 경과 시간을 계속 등록
+            if (timeSpan > cooltime)  // 경과 시간이 특정 시간이 보다 커졋을 경우
+            {
+                turnPre = isPlayer1Turn;
+                timeSpan = 0;
+            }
+        }
     }
     public static Manager GetManager()//싱글톤
     {

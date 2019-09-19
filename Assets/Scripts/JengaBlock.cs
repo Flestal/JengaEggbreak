@@ -50,7 +50,7 @@ public class JengaBlock : MonoBehaviour
     }
     public bool BlockDestroy()
     {
-        if (true)//턴 조건
+        if (manager.turnPre==manager.isPlayer1Turn)//턴 조건
         {
             Destroy(gameObject);
             manager.isPlayer1Turn = !manager.isPlayer1Turn;//제거할때 턴넘기기
