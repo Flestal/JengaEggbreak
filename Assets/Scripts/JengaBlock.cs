@@ -41,7 +41,7 @@ public class JengaBlock : MonoBehaviour
             t = ClickedObject();
             if (t != null)
             {
-                if (t.Equals(gameObject))
+                if (t.Equals(gameObject)&&manager.isPlayer1Turn==manager.isTurn1_Jenga)
                 {
                     Board.GetComponent<JengaBoard>().StartCoroutine("Board_Shuffle");
                     BlockDestroy();
