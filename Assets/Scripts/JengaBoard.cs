@@ -12,21 +12,25 @@ public class JengaBoard : MonoBehaviour
     [SerializeField] private GameObject gameManager;
     private Manager manager;
 
-    [SerializeField] private GameObject[] Blocks;
-
     // Start is called before the first frame update
     void Start()
     {
         text.text = "";
         gameManager = GameObject.FindGameObjectWithTag("GameManager");
         manager = gameManager.gameObject.GetComponent<Manager>();
-        text.gameObject.SetActive(true);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (manager.GetCurrentCamera(0))
+        {
+            text.gameObject.SetActive(true);
+        }
+        else
+        {
+            text.gameObject.SetActive(false);
+        }
         if (Input.GetKeyDown(KeyCode.R))
         {
             SceneManager.LoadScene("GamePlay");
@@ -89,19 +93,5 @@ public class JengaBoard : MonoBehaviour
             yield return new WaitForSeconds(0.01f);
         }
         this.gameObject.transform.eulerAngles = new Vector3(0,0,0);
-    }
-    public void BlockDestroy_AI()
-    {
-        if (manager.isPlayer1Turn==false)
-        {
-            int r = Random.Range(0, Blocks.Length);
-            while (Blocks[r] == null)
-            {
-                r = Random.Range(0, Blocks.Length);
-            }
-            Destroy(Blocks[r],Random.Range(1.5f,5.5f));
-            StartCoroutine("Board_Shuffle");
-            manager.isPlayer1Turn = true;
-        }
     }
 }

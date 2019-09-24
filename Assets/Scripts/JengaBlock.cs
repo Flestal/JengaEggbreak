@@ -10,11 +10,12 @@ public class JengaBlock : MonoBehaviour
     public bool isTop = false;//꼭대기 블럭 확인(사용안함)
     public bool isPicked = false;//선택된 블럭 확인(사용안함)
     private GameObject t;
+    public Vector3 v;
     [SerializeField]public short _id;
 
     [SerializeField] private GameObject Board;
 
-    [SerializeField]public GameObject gameManager;
+    private GameObject gameManager;
     private Manager manager;
 
     // Start is called before the first frame update
@@ -22,16 +23,15 @@ public class JengaBlock : MonoBehaviour
     {
         Board = GameObject.FindGameObjectWithTag("Board");
         gameManager = GameObject.FindGameObjectWithTag("GameManager");
-        manager = gameManager.GetComponent<Manager>();//게임매니저 호출
-        //manager = Manager.m_Instance;
+        manager = gameManager.gameObject.GetComponent<Manager>();//게임매니저 호출
+        Debug.Log(manager.GetCurrentCamera(0));
         
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-        //Debug.Log(manager.isPlayer1Turn);
+        v = new Vector3(this.gameObject.transform.position.x,this.gameObject.transform.position.y,this.gameObject.transform.position.z);
     }
 
     private void FixedUpdate()
@@ -41,9 +41,8 @@ public class JengaBlock : MonoBehaviour
             t = ClickedObject();
             if (t != null)
             {
-                if (t.Equals(gameObject)&&manager.isPlayer1Turn)
+                if (t.Equals(gameObject))
                 {
-                    manager.isPlayer1Turn = false;
                     Board.GetComponent<JengaBoard>().StartCoroutine("Board_Shuffle");
                     BlockDestroy();
                 }
@@ -51,22 +50,32 @@ public class JengaBlock : MonoBehaviour
             
         }
     }
-    public void BlockDestroy()
+    public bool BlockDestroy()
     {
-        Destroy(gameObject);
-        Board.GetComponent<JengaBoard>().BlockDestroy_AI();
+        if (manager.turnPre==manager.isPlayer1Turn)//턴 조건
+        {
+            Destroy(gameObject);
+            manager.isPlayer1Turn = !manager.isPlayer1Turn;//제거할때 턴넘기기
+            Debug.Log(manager.isPlayer1Turn);
+            return true;
+        }
+        return false;
     }
     private GameObject ClickedObject()//클릭한 오브젝트 반환
     {
         RaycastHit hit;
         GameObject target = null;
-        
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if((Physics.Raycast(ray.origin,ray.direction*10,out hit)) == true)
+
+        if (manager.GetCurrentCamera(0))
         {
-            target = hit.collider.gameObject;
+            Ray ray = manager.GetCamera(0).ScreenPointToRay(Input.mousePosition);
+            if((Physics.Raycast(ray.origin,ray.direction*10,out hit)) == true)
+            {
+                target = hit.collider.gameObject;
+            }
+            return target;
         }
-        return target;
+        return null;
     }
     
 
