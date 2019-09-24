@@ -111,14 +111,6 @@ public class Manager : MonoBehaviour
         {
             turn.text += "플레이어 2의 턴";
         }
-        if (isTurn1_Jenga)
-        {
-            turn.text += "\n당신은 플레이어 1입니다.";
-        }
-        else
-        {
-            turn.text += "\n당신은 플레이어 2입니다.";
-        }
         if (Input.GetKeyDown(KeyCode.Space))//스페이스 바를 통해 카메라 전환(테스트용)
         {
             cameraNum=(cameraNum < m_AllCameras.Length-1 ? cameraNum+1 : 0);
